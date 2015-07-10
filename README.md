@@ -23,6 +23,8 @@ Any dead cell with exactly three live neighbours becomes a live cell, as if by r
 
 This version has three cells, "inert", "live", "evolved" - nothing moves and when a cell dies it is removed. This is not intentional, just what ended up working first in the initial phaser demo (before ES6, etc). I'd like this to evolve to a bigger thing, with AI and "personalities" that gravitate towards certain preferences (ie certain colors/shapes of target blocks, perhaps as a source of energy. Certain blocks provide certain energies, simulating glucose in brain and fat in the body (I'm not a neurologist, I'd welcome input here).  
 
+Note: I figured out why this version is different than the "real" version - I treated a cell as an existing "thing" where really they mean "position" - so a "dead cell" is an empty cell - when brought alive, an actual "thing" is rendered.
+
 ## How to Use/Set up    
 
 build config:  
