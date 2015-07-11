@@ -79,20 +79,15 @@ class ExploreState {
         return cell;
         
     }
-    create() {
+    create() {        
+        this.cells = this.game.add.group();       
         
-        this.cells = this.game.add.group();
-        
-        
-        for(let x=0; x < Utility.WORLD_SIZE;x+=(this.game.rnd.integerInRange(0,5))) {                        
-            
-            
-            for(let y=0; y < Utility.WORLD_SIZE;y+=this.game.rnd.integerInRange(0,5)) {                
+        for(let x=0; x < Utility.WORLD_SIZE;x+=(this.game.rnd.integerInRange(0,4))) {
+            for(let y=0; y < Utility.WORLD_SIZE;y+=this.game.rnd.integerInRange(0,4)) {                
                 this.createCell(x,y);
             }
         }
-        this.game.time.events.loop(1500, this.tick, this);
-        
+        this.game.time.events.loop(500, this.tick, this);        
     }
     
     

@@ -7,8 +7,8 @@ import ExploreState from 'states/explore';
 
 import Utility from 'utility';
 
-var SIZE = Utility.WORLD_SIZE*Utility.CELL_SIZE; // cells * 16 per TODO: replace with import from utility
-var game = new Phaser.Game(SIZE ,SIZE, Phaser.AUTO, 'game');
+var size = Utility.WORLD_SIZE*Utility.CELL_SIZE; // cells * 16 per TODO: replace with import from utility
+var game = new Phaser.Game(size ,size, Phaser.AUTO, 'game');
 
 game.state.add('boot',BootState);
 game.state.add('load',LoadState);
