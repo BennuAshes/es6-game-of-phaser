@@ -10,8 +10,7 @@ class ExploreState {
         var neighborManager = new NeighborManager();
 
         // as each cell is added to the list, new counts are generated on the fly
-        // this could be sped up by 
-        this.cells.forEachAlive(function(aliveCell) {
+        this.cells.forEachAlive(aliveCell => {
             neighborManager.addCell(aliveCell);
         },this);
         
@@ -23,17 +22,18 @@ class ExploreState {
         var neighboredCells = neighborManager.getCells();
         // TODO: convert this to ES6, tried let ..of syntax but couldn't find
         // how to get the key (which in this case is the x,y) let [x,xRow] didn't work, it returned 0,undefined
-        console.log('explore',neighboredCells);
+        //console.log('explore tick()',neighboredCells,this.cells);
         for(var x in neighboredCells) {      
             var xRow = neighboredCells[x];
-            console.log('explore',x,xRow);
+            //console.log('explore',x,xRow);
             for(var y in xRow) {                
                 // this is getting hacky
                 var tile = xRow[y];
-                var count = tile.Count; // Cells.length;
-                var cell = tile.Cell; // this is the specific cell
+                var count = tile.Count;
+                // this is the specific live cell in this tile
+                var cell = tile.Cell; 
                 
-                console.log('explore',y,tile);
+                //console.log('explore',y,tile);
                 // can do things with cells here yay!
                 if(count > 3) {
                     if(cell !== null) {
@@ -56,43 +56,47 @@ class ExploreState {
                     if(cell !== null) {
                         cell.frame = 1;
                     } else {
-                        console.log("adding cell at x,y,",x,y);
-                        this.createCell(x,y);
+                        this.growCell(x,y);
                     }
-                }/* else if (count == 2) {
-                    // organism evolves - change frame
-                    cell.frame = 1;
-                }*/
+                }
             }
         }
-        console.log(neighborManager);
+        //console.log(neighborManager);
         markedCells.forEach(function(cell) {
             cell.kill();                
         });
   
         
     }
-    createCell (newCellX,newCellY) {
-        var cell = this.game.add.sprite(newCellX* Utility.CELL_SIZE,newCellY* Utility.CELL_SIZE,'cell');
-        this.game.physics.enable(cell,Phaser.Physics.ARCADE);                    
+    growCell (newCellX,newCellY) {
+        var cell = this.game.add.sprite(Utility.cellToPixel(newCellX) ,Utility.cellToPixel(newCellY),'cell');
+        this.game.physics.enable(cell,Phaser.Physics.ARCADE);
         this.cells.add(cell);
+        
         return cell;
         
-    }
+    } 
     create() {        
         this.cells = this.game.add.group();       
-        
-        for(let x=0; x < Utility.WORLD_SIZE;x+=(this.game.rnd.integerInRange(0,4))) {
-            for(let y=0; y < Utility.WORLD_SIZE;y+=this.game.rnd.integerInRange(0,4)) {                
-                this.createCell(x,y);
+        // x,y in cells not pixels
+        for(let x=0; x < Utility.WORLD_SIZE;x+=(this.game.rnd.integerInRange(0,6))) {
+            for(let y=0; y < Utility.WORLD_SIZE;y+=this.game.rnd.integerInRange(0,6)) {                
+                this.growCell(x,y);
             }
         }
+        
+        this.input.onUp.add(pointer => {
+            console.log(pointer);
+            // TODO: just guessing on the exact x,y to use right now, confirm?
+            this.growCell(Utility.pixelToCell(pointer.x),Utility.pixelToCell(pointer.y)); 
+        },this);
+        
         this.game.time.events.loop(500, this.tick, this);        
     }
     
     
     update() {
-        
+        // all the magic happens in the create() event loop triggering this.tick()
     }
     
     

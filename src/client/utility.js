@@ -6,7 +6,7 @@
 // like making some hacky export function or export class static method shenanigans)
 var Utility = {
     CELL_SIZE: 16,
-    WORLD_SIZE: 40,
+    WORLD_SIZE: 50,
     // TODO: is "parseInt" ES6? maybe import {parseInt} from 'Number'?
     pixelToCell: function (pixelAmount) {
         return parseInt(pixelAmount/Utility.CELL_SIZE);
