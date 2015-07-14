@@ -43,6 +43,8 @@ This will copy client and server files to the dist folder (transpiling, jshint, 
 
 If you have your own server you can run "gulp client" and serve files from dist/client.  
 
+Troubleshooting: I develop on Windows for various reasons - when setting it up on linux I had to manually "jspm install babel" then "jspm install" otherwise I'd get an error with babel-core.
+
 ## UI - React?
 Eventually it would be nice to have some kind of UI for the fun of it - I have React in mind to try it out.  
 
