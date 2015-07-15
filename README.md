@@ -21,25 +21,25 @@ Any live cell with two or three live neighbours lives on to the next generation.
 Any live cell with more than three live neighbours dies, as if by overcrowding.  
 Any dead cell with exactly three live neighbours becomes a live cell, as if by reproduction."  
 
-The current version is a copy of the above algorithm (I haven't tested it heavily, please let me know if you disagree - the previous version /definitely/ wasn't a correct version as no new cells were ever created).
+The current version is a copy of the above algorithm (It's been moderately tested, but please let me know if you disagree - the previous version /definitely/ wasn't a correct version as no new cells were ever created).
 
-Click to add cells, steps forward and back, etc would also be nice. Lot's of features other people have implemented that could be added here.
+Click to add cells, steps forward and back, etc would also be nice. Lot's of features other people have implemented that could be added here.  
 
 ## How to Use/Set up    
 
-build config:  
-\[/home/themime/\]: cd es6-game-of-phaser  
-\[/home/themime/es6-game-of-phaser/\]: npm install  
-client config:  
-\[/home/themime/es6-game-of-phaser/\]: cd dist/client  
-\[/home/themime/es6-game-of-phaser/dist/client/\]: jspm install  
-server config:  
-\[/home/themime/es6-game-of-phaser/dist/client/\]: cd ../server  
-\[/home/themime/es6-game-of-phaser/dist/server/\]: npm install  
-\[/home/themime/es6-game-of-phaser/dist/server/\]: cd ../../  
-\[/home/themime/es6-game-of-phaser/\]: gulp  
+#### build config:  
+cd es6-game-of-phaser  
+npm install  
+#### client config:  
+cd dist/client  
+jspm install  
+#### server config:  
+cd ../server  
+npm install  
+cd ../../  
+gulp  
 
-This will copy client and server files to the dist folder (transpiling, jshint, etc) as needed and start gulp-live-server.  
+This will copy client and server files to the dist folder (transpiling, jshint, etc) as needed and start gulp-live-server. Download the extension Chrome Live Reload and click the icon and when you make a chance you should see gulp rerun the tasks and your window refresh.  
 
 If you have your own server you can run "gulp client" and serve files from dist/client.  
 
@@ -49,8 +49,7 @@ Troubleshooting: I develop on Windows for various reasons - when setting it up o
 Eventually it would be nice to have some kind of UI for the fun of it - I have React in mind to try it out.  
 
 ## TODO:
-* the watches need corrected paths and uncommenting, the server reload doesn't actually work right now
-* instructions on live reload in browser (its just a plugin)
+* remove dist directory - have it be removed by del and created from scratch to avoid confusion (I'm confusing myself right now with this experimental setup
 * figured out issues/bugs thing and put these there?
 * info on getting mongodb set up
 * do something with the User route?
