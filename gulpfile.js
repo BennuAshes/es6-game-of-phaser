@@ -26,15 +26,19 @@ gulp.task('build',['client','server']);
 gulp.task('start',['build'],function() {
     var server = gls.new('dist/server/app.js');
     server.start(); // .run(['./dist/server/app.js']);
+     
+     gulp.watch('./src/client/**/*.js',['client']);
+     gulp.watch('./src/server/**/*.js',['server']);
     
-    gulp.watch('./src/**/*.js',function() {
-        server.notify(server,arguments);
+    
+    gulp.watch('./dist/client/**/*.js',function() {
+        server.notify.apply(server,arguments);
     });
-    //gulp.watch('./src/server/!(node_modules|package.json|config.json|resource)**/*.js',function() {
-    //    server.notify(server,arguments);
-    //});
+    gulp.watch('./dist/server/**',function() {
+        server.run.apply(server,arguments);
+    });
     
-    gulp.watch('myapp.js', server.start.bind(server));
+    // gulp.watch('myapp.js', server.start.bind(server));
     // gulp.watch([Path.css], ['css']);
     // gulp.watch([Path.script],['script']);
     // gulp.watch([Path.image], ['image']);	
